@@ -1,18 +1,3 @@
-
-RewriteEngine on
-
-RewriteCond %{HTTP_HOST} !^$
-
-RewriteCond %{HTTPS}s ^on(s)|
-RewriteRule ^ https%1://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-
-
-RewriteCond %{HTTPS} off
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=302,L,NE]
-
-LimitRequestBody 104857600
-
-
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
