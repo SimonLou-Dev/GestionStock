@@ -1,4 +1,8 @@
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 799823666f7cbc448447b796298bf9ccc5a8189b
 
 RewriteEngine On
 RewriteCond %{HTTPS} !=on
