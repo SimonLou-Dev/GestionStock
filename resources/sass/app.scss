@@ -1,0 +1,91 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+#content{
+  width: 100%;
+}
+
+#table_main{
+  margin: 0 auto;
+  background-color: #e5e9f0;
+  width: fit-content;
+  padding: 15px;
+  border-radius: 30px;
+  border: black 1px solid;
+  table{
+
+    max-width: 550px;
+    td{
+      border: #2d3748 1px solid;
+      min-height: 30px;
+      max-height: 60px;
+      padding: 5px;
+    }
+    .product{
+      width: 300px;
+      text-wrap: normal;
+      word-wrap: anywhere;
+    }
+    .number{
+      width: 100px;
+      text-align: center;
+    }
+    .form{
+      width: 150px;
+      text-align: center;
+      height: 60px;
+      a{
+        padding: 5px 7px;
+        margin: 10px 5px;
+        background-color: #00bfff;
+        border-radius: 16px;
+        color: #fff;
+      }
+    }
+    tr{
+      border-right: #1a202c 2px solid;
+      border-left: #1a202c 2px solid;
+    }
+    thead{
+      background-color: #00bfff;
+      border-bottom: #1a202c 2px solid;
+      border-top: #1a202c 2px solid;
+      text-align: center;
+    }
+
+  }
+}
+
+#remove{
+  margin: 0 auto;
+  width: 300px;
+  border-radius: 70px;
+  background-color: #e5e9f0;
+  border: black 1px solid;
+
+}
+
+#add{
+  margin: 0 auto;
+  width: 300px;
+  border-radius: 70px;
+  background-color: #e5e9f0;
+  border: black 1px solid;
+}
+
+#connect{
+  padding: 30px;
+  width: 500px;
+  margin: 0 auto;
+  border-radius: 70px;
+  background-color: #e5e9f0;
+  border: black 1px solid;
+}
+
+#register{
+  padding: 30px;
+  width: 500px;
+  margin: 0 auto;
+  border-radius: 70px;
+  background-color: #e5e9f0;
+  border: black 1px solid;
+}
