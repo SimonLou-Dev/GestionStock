@@ -24,13 +24,13 @@ Route::get('/logout', function (){
     return \Illuminate\Support\Facades\Redirect::to('/');
 })->name('logout');
 
-Route::get('/product/add',[App\Http\Controllers\StockController::class, 'add'] )->name('product.add')->middleware('Auth');
-Route::get('/product/remove', [App\Http\Controllers\StockController::class, 'remove'])->name('product.remove')->middleware('Auth');
-Route::post('/remove/product/', [App\Http\Controllers\StockController::class, 'destroy'] )->name('product.destroy')->middleware('Auth');
-Route::post('/add/product/post',[App\Http\Controllers\StockController::class, 'store'] )->name('product.add.post')->middleware('Auth');
+Route::get('/product/add',[App\Http\Controllers\StockController::class, 'add'] )->name('product.add')
+Route::get('/product/remove', [App\Http\Controllers\StockController::class, 'remove'])->name('product.remove')
+Route::post('/remove/product/', [App\Http\Controllers\StockController::class, 'destroy'] )->name('product.destroy')
+Route::post('/add/product/post',[App\Http\Controllers\StockController::class, 'store'] )->name('product.add.post')
 
 
-Route::get('/add/item/{id}', [App\Http\Controllers\StockController::class, 'additem'])->name('add.item')->middleware('Auth');
-Route::get('/remove/item/{id}', [App\Http\Controllers\StockController::class, 'removeitem'])->name('remove.item')->middleware('Auth');
+Route::get('/add/item/{id}', [App\Http\Controllers\StockController::class, 'additem'])->name('add.item')
+Route::get('/remove/item/{id}', [App\Http\Controllers\StockController::class, 'removeitem'])->name('remove.item');
 
 
