@@ -30,7 +30,7 @@ Route::post('/remove/product/', [App\Http\Controllers\StockController::class, 'd
 Route::post('/add/product/post',[App\Http\Controllers\StockController::class, 'store'] )->name('product.add.post');
 
 
-Route::get('/add/item/{id}', [App\Http\Controllers\StockController::class, 'additem'])->name('add.item');
-Route::get('/remove/item/{id}', [App\Http\Controllers\StockController::class, 'removeitem'])->name('remove.item');
+Route::get('/add/item/{id}/{space}', [App\Http\Controllers\StockController::class, 'additem'])->name('add.item');
+Route::get('/remove/item/{id}/{space}', [App\Http\Controllers\StockController::class, 'removeitem'])->name('remove.item');
 
 

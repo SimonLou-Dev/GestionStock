@@ -101,20 +101,27 @@ class StockController extends Controller
         return view('Category.remove', ['products'=> $product]);
     }
 
-    public function additem($id){
+    public function additem($id, $space){
         $item = ItemsModel::find($id);
-        $item->number_of_items = $item->number_of_items +1;
+        $space == 1 ? ($item->home_items += 1) : $item->depot_items += 1;
         $item->save();
         $product = ItemsModel::get();
         return redirect()->route('index', ['products'=> $product]);
     }
 
-    public function removeitem($id){
+    public function removeitem($id,$space){
         $item = ItemsModel::find($id);
-        if($item->number_of_items > 0){
-            $item->number_of_items = $item->number_of_items-1;
-            $item->save();
+
+        if($space == 0 & $item->depot_items > 0){
+            $item->depot_items -= 1;
         }
+
+        if($space == 1 & $item->home_items > 0){
+            $item->home_items -= 1;
+        }
+
+        $item->save();
+
         $product = ItemsModel::get();
         return redirect()->route('index', ['products'=> $product]);
     }

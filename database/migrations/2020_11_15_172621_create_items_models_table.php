@@ -16,7 +16,8 @@ class CreateItemsModelsTable extends Migration
         Schema::create('items_models', function (Blueprint $table) {
             $table->id('id');
             $table->string('item_name');
-            $table->integer('number_of_items')->default(0);
+            $table->integer('home_items')->default(0);
+            $table->integer('depot_items')->default(0);
             $table->timestamps();
         });
     }
