@@ -1,0 +1,22 @@
+version: '3.6'
+
+services:
+  celobat:
+    restart: always
+    image: simonloudev/celobat
+    container_name: 'celobat'
+    volumes:
+      - celobat_storage:/usr/share/nginx/celobat/storage
+    environment:
+      - VIRTUAL_HOST=celobat.simon-lou.com
+      - VIRTUAL_PORT=80
+    expose:
+      - 80
+
+volumes:
+  celobat_storage:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
