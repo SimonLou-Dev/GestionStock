@@ -15,11 +15,7 @@
         <header class="header-section">
             <div class="container-fluid">
                 <div class="nav-menu">
-                    @if (Auth::check())
-                        @include('inc.auth.header')
-                    @else
-                        @include('inc.ano.header')
-                    @endif
+                    @include('layouts.header')
                 </div>
                 <div id="mobile-menu-wrap"></div>
             </div>

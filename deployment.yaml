@@ -1,0 +1,90 @@
+#apiVersion: secrets.doppler.com/v1alpha1
+#kind: DopplerSecret
+#metadata:
+#  name: celobatSecret # DopplerSecret Name
+#  namespace: doppler-operator-system
+#spec:
+#  tokenSecret: # Kubernetes service token secret (namespace defaults to doppler-operator-system)
+#    name: doppler-token-secret
+#  managedSecret: # Kubernetes managed secret (will be created if does not exist)
+#    name: celobat-secret-env
+#    namespace: default # Should match the namespace of deployments that will use the secret
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-celobat
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: celobat
+  name: celobat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: celobat
+  template:
+    metadata:
+      labels:
+        app: celobat
+    spec:
+      volumes:
+        - name: celobat-data
+          persistentVolumeClaim: { claimName: pvc-celobat }
+      containers:
+        - image: simonloudev/celobat:latest
+          name: mailhog
+          #envFrom:
+          #  - secretRef:
+          #      name: celobat-secret-env
+          startupProbe: &probe
+            httpGet:
+              port: 80
+          readinessProbe: *probe
+          livenessProbe: *probe
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /usr/share/nginx/
+              name: celobat-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: celobat
+  name: celobat
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: celobat
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: celobat
+spec:
+  rules:
+    - host: celobat.simon-lou.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: celobat
+                port:
+                  number: 80
+

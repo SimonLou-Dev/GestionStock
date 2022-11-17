@@ -15,15 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\StockController::class, 'index'])->name('index');
 
-Auth::routes();
-
-Route::get('/logout', function (){
-    auth()->logout();
-    Session()->flush();
-
-    return \Illuminate\Support\Facades\Redirect::to('/');
-})->name('logout');
-
 Route::get('/product/add',[App\Http\Controllers\StockController::class, 'add'] )->name('product.add');
 Route::get('/product/remove', [App\Http\Controllers\StockController::class, 'remove'])->name('product.remove');
 Route::post('/remove/product/', [App\Http\Controllers\StockController::class, 'destroy'] )->name('product.destroy');

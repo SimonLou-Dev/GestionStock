@@ -7,7 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{{route('login')}}">Me connecter</a>
+                <a class="nav-link" href="{{route('product.add')}}">Ajouter</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{route('product.remove')}}">Supprimer</a>
             </li>
         </ul>
     </div>
