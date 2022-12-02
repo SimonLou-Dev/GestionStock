@@ -43,9 +43,8 @@ spec:
       containers:
         - image: simonloudev/celobat:latest
           name: mailhog
-          #envFrom:
-          #  - secretRef:
-          #      name: celobat-secret-env
+          ports:
+            - containerPort: 80
           startupProbe: &probe
             httpGet:
               port: 80

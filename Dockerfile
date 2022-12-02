@@ -54,5 +54,3 @@ RUN update-alternatives --set php /usr/bin/php8.1
 
 #Prepare app
 COPY ./docker/default.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
