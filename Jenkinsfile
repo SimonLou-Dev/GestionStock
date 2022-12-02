@@ -1,20 +1,5 @@
 pipeline{
-    agent kubernetes {
-        label 'jenkins-slave'
-        defaultContainer 'jnlp'
-        yaml '''
-        apiVersion: v1
-        kind: Pod
-        spec:
-          containers:
-          - name: shell
-            image: ubuntu
-            command:
-            - sleep
-            args:
-            - infinity
-        '''
-    }
+    agent any
 
     stages {
         stage('Cleaning'){
