@@ -42,6 +42,7 @@ spec:
           persistentVolumeClaim: { claimName: pvc-celobat }
       containers:
         - image: simonloudev/celobat:latest
+          pullPolicy: Always
           name: mailhog
           ports:
             - containerPort: 80
