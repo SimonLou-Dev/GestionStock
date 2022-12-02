@@ -35,14 +35,7 @@ pipeline {
 
     stage('Build & tag container') {
       steps {
-        script {
-          def image = docker.build("simonloudev/celobat:${env.BUILD_NUMBER}")
-          docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-          }
-        }
-
+        sh 'kaniko/executor --dockerfile=Dockerfile --context="pwd" --destination simonloudev/celobat:${env.BUILD_NUMBER} --destination simonloudev/celobat:latest'
       }
     }
 
