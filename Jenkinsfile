@@ -15,6 +15,14 @@ pipeline {
       }
     }
 
+
+    stage('Composer & yarn Install') {
+        steps {
+            sh 'composer install'
+            sh 'yarn install'
+        }
+    }
+
     stage('Write .env [prod]') {
       steps {
         withCredentials(bindings: [file(credentialsId: 'env-gestion-stoque-prod', variable: 'envfile')]) {
