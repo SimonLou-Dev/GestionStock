@@ -36,12 +36,10 @@ pipeline {
     stage('Build & tag container') {
       steps {
         container('docker'){
-            script {
-                sh 'docker build -t simonloudev/celobat:${env.BUILD_NUMBER} .'
-                sh 'docker tag simonloudev/celobat:${env.BUILD_NUMBER} simonloudev/celobat:latest'
-                sh 'docker push simonloudev/celobat:${env.BUILD_NUMBER}'
-                sh 'docker push simonloudev/celobat:latest'
-            }
+            sh 'docker build -t simonloudev/celobat:${env.BUILD_NUMBER} .'
+            sh 'docker tag simonloudev/celobat:${env.BUILD_NUMBER} simonloudev/celobat:latest'
+            sh 'docker push simonloudev/celobat:${env.BUILD_NUMBER}'
+            sh 'docker push simonloudev/celobat:latest'
         }
       }
     }
