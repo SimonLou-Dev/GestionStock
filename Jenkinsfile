@@ -35,7 +35,14 @@ pipeline {
 
     stage('Build & tag container') {
       steps {
-        sh 'kaniko/executor --dockerfile=Dockerfile --context="pwd" --destination simonloudev/celobat:${env.BUILD_NUMBER} --destination simonloudev/celobat:latest'
+        container('docker'){
+            script {
+                sh 'docker build -t simonloudev/celobat:${env.BUILD_NUMBER} .'
+                sh 'docker tag simonloudev/celobat:${env.BUILD_NUMBER} simonloudev/celobat:latest'
+                sh 'docker push simonloudev/celobat:${env.BUILD_NUMBER}'
+                sh 'docker push simonloudev/celobat:latest'
+            }
+        }
       }
     }
 
