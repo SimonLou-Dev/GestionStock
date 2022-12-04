@@ -1,15 +1,4 @@
-#apiVersion: secrets.doppler.com/v1alpha1
-#kind: DopplerSecret
-#metadata:
-#  name: celobatSecret # DopplerSecret Name
-#  namespace: doppler-operator-system
-#spec:
-#  tokenSecret: # Kubernetes service token secret (namespace defaults to doppler-operator-system)
-#    name: doppler-token-secret
-#  managedSecret: # Kubernetes managed secret (will be created if does not exist)
-#    name: celobat-secret-env
-#    namespace: default # Should match the namespace of deployments that will use the secret
----
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -42,7 +31,7 @@ spec:
           persistentVolumeClaim: { claimName: pvc-celobat }
       containers:
         - image: simonloudev/celobat:latest
-          pullPolicy: Always
+          imagePullPolicy: "Always"
           name: mailhog
           ports:
             - containerPort: 80
@@ -51,7 +40,6 @@ spec:
               port: 80
           readinessProbe: *probe
           livenessProbe: *probe
-          imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /usr/share/nginx/
               name: celobat-data
@@ -87,4 +75,7 @@ spec:
                 name: celobat
                 port:
                   number: 80
-
+  tls:
+    - hosts:
+        - "celobat.simon-lou.com"
+      secretName: simon-lou-prod-tls

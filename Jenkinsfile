@@ -69,7 +69,7 @@ pipeline {
       steps {
         container('docker') {
             script {
-                docker.withRegistry('https://docker.io', 'docker-hub-credentials') {
+                docker.withRegistry('http://registry.hub.docker.com/', 'docker-hub-credentials') {
                     def img = docker.build "simonloudev/celobat:latest"
                     img.push("latest")
                     img.push("{env.BUILD_NUMBER}")
