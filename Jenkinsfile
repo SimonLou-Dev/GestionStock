@@ -46,7 +46,7 @@ pipeline {
         }
     }
 
-    stage('Fresh Database')
+    stage('Fresh Database') {
         steps {
             sh "php artisan migrate:reset"
             sh "rm .env"
