@@ -37,10 +37,11 @@ pipeline {
     stage('Build & tag container') {
       steps {
         container('docker') {
-            sh 'docker build -t simonloudev/celobat:${BUILD_NUMBER} .'
-            sh 'docker tag simonloudev/celobat:${BUILD_NUMBER} simonloudev/celobat:latest'
-            sh 'docker push simonloudev/celobat:${BUILD_NUMBER}'
-            sh 'docker push simonloudev/celobat:latest'
+            def image = docker.build("gestion-stoque-prod")
+            docker.withRegistry('docker.io', 'docker-hub-credentials') {
+                image.push("${env.BUILD_NUMBER}")
+                image.push("latest")
+            }
         }
       }
     }

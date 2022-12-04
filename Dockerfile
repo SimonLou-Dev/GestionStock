@@ -6,7 +6,6 @@ ENV TZ=UTC
 # Copy & set WorkDir
 VOLUME /usr/share/nginx/celobat/storage
 WORKDIR /usr/share/nginx/celobat
-COPY . /usr/share/nginx/celobat
 
 # Env Key & base pakadge
 RUN apt-get update \
@@ -35,7 +34,7 @@ RUN apt-get install -y wget
 
 
 ## yarn and node
-RUN curl -sL https://deb.nodesource.com/setup_17.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_19.x | bash - \
   && apt-get install -y nodejs \
   && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
@@ -52,5 +51,13 @@ RUN apt-get install -y postgresql-client \
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
 RUN update-alternatives --set php /usr/bin/php8.1
 
-#Prepare app
+#Ccopy files
+COPY . /usr/share/nginx/celobat
+COPY --chown=www-data . /usr/share/nginx/celobat
+
+#Config Nginx And socket
 COPY ./docker/default.conf /etc/nginx/conf.d/default.conf
+#COPY ./docker/www.conf /etc/php/8.1/fpm/pool.d/www.conf
+#Start APP
+EXPOSE 80
+ENTRYPOINT ["/usr/share/nginx/celobat/docker/entrypoint.sh"]
