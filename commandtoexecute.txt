@@ -1,9 +1,0 @@
-cat docker-compose.yml | ssh root@75.119.154.204 'cat - > /infra/web/celobat/docker-compose.yml'
-ssh root@75.119.154.204 docker-compose -f /infra/web/celobat/docker-compose.yml up -d
-ssh root@75.119.154.204 docker exec -i celobat service php8.1-fpm start
-ssh root@75.119.154.204 docker exec -i celobat composer update
-ssh root@75.119.154.204 docker exec -i celobat chmod 777 /var/run/php/php8.1-fpm.sock
-ssh root@75.119.154.204 docker exec -i celobat chmod 777 -R /usr/share/nginx/celobat/
-ssh root@75.119.154.204 docker exec -i celobat chown www-data -R /usr/share/nginx/celobat/
-ssh root@75.119.154.204 docker exec -i celobat php artisan storage:link
-ssh root@75.119.154.204 docker cp /var/www/celobat/.env celobat:/usr/share/nginx/celobat/.env

@@ -31,7 +31,7 @@ pipeline {
 
     stage('PHP Testing') {
         steps {
-            sh './vendor/bin/phpunit --coverage-clover ./reports/coverage.xml --log-junit ./reports/test.xml'
+            sh 'php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-clover ./reports/coverage.xml --log-junit ./reports/test.xml'
         }
     }
 
@@ -70,7 +70,7 @@ pipeline {
         container('docker') {
             script {
                 docker.withRegistry('https://docker.io', 'docker-hub-credentials') {
-                    def img = docker.build "simonloudev/celobat"
+                    def img = docker.build "simonloudev/celobat:latest"
                     img.push("${env.BUILD_NUMBER}")
                     img.push("latest")
                 }
