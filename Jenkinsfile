@@ -37,7 +37,11 @@ pipeline {
     stage('Build & tag container') {
       steps {
         container('docker') {
-            sh 'ls'
+            docker.withRegistry('docker.io', 'docker-hub-credentials') {
+                def img = docker.build "simonloudev/celobat"
+                img.push("${env.BUILD_NUMBER}")
+                img.push("latest")
+            }
         }
       }
     }
