@@ -15,6 +15,7 @@ pipeline {
         steps {
             sh 'composer install'
             sh 'yarn install'
+            sh 'export BUILD_NUMBER=${BUILD_NUMBER}'
         }
     }
 
