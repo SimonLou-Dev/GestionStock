@@ -36,7 +36,7 @@ pipeline {
 
     stage('Build & tag container') {
       steps {
-        
+        sh "ls"
       }
     }
 
