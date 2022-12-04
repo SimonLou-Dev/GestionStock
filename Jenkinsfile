@@ -1,14 +1,9 @@
 pipeline {
   agent {label 'jenkins-slave'}
   stages {
-    stage('Cleaning') {
-      steps {
-        sh "ls"
-      }
-    }
-
     stage('Verification') {
       steps {
+        checkout scm
         validateDeclarativePipeline 'Jenkinsfile'
         sh 'php -v'
         sh 'php -i'
@@ -38,7 +33,7 @@ pipeline {
       steps {
         container('docker') {
             script {
-                docker.withRegistry('docker.io', 'docker-hub-credentials') {
+                docker.withRegistry('https://docker.io', 'docker-hub-credentials') {
                     def img = docker.build "simonloudev/celobat"
                     img.push("${env.BUILD_NUMBER}")
                     img.push("latest")
