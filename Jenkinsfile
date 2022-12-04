@@ -18,14 +18,49 @@ pipeline {
         }
     }
 
-    stage('Write .env [prod]') {
+    stage('Testing environment setup') {
+        steps {
+            withCredentials(bindings: [file(credentialsId: 'env-gestion-stoque-test', variable: 'envfile')]) {
+              writeFile(file: '.env', text: readFile(envfile))
+            }
+            sh 'php artisan key:generate'
+            sh 'php artisan migrate:fresh --seed'
+        }
+    }
+
+    stage('PHP Testing') {
+        steps {
+            sh 'php artisan test'
+        }
+    }
+
+    stage('SonarScanner')
+        environment {
+                scannerHome = tool 'scanner'
+        }
+        steps {
+            withSonarQubeEnv(installationName: 'SonarServ', credentialsId: 'sonar-token') {
+                sh '${scannerHome}/bin/sonar-scanner'
+            }
+        }
+    }
+
+    stage('Fresh Database')
+        steps {
+            sh "php artisan migrate:reset"
+            sh "rm .env"
+        }
+    }
+
+
+    stage('Production environment setup') {
       steps {
+
         withCredentials(bindings: [file(credentialsId: 'env-gestion-stoque-prod', variable: 'envfile')]) {
           writeFile(file: '.env', text: readFile(envfile))
         }
 
         sh 'php artisan key:generate'
-        sh 'echo $BUILD_NUMBER'
       }
     }
 
