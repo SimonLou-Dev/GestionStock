@@ -37,7 +37,7 @@ pipeline {
     stage('Build & tag container') {
       steps {
         container('docker') {
-            def image = docker.build("gestion-stoque-prod")
+            image = docker.build("gestion-stoque-prod")
             docker.withRegistry('docker.io', 'docker-hub-credentials') {
                 image.push("${env.BUILD_NUMBER}")
                 image.push("latest")
