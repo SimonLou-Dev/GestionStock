@@ -51,15 +51,18 @@ class StockController extends Controller
         return redirect()->route('index', ['products'=> $product]);
     }
 
-    public function add(){
+    public function add()
+    {
         return view('Category.add');
     }
-    public function remove(){
+    public function remove()
+    {
         $product = ItemsModel::get();
         return view('Category.remove', ['products'=> $product]);
     }
 
-    public function additem($id, $space){
+    public function additem($id, $space)
+    {
         $item = ItemsModel::find($id);
         $space == 1 ? ($item->home_items += 1) : $item->depot_items += 1;
         $item->save();
@@ -67,14 +70,15 @@ class StockController extends Controller
         return redirect()->route('index', ['products'=> $product]);
     }
 
-    public function removeitem($id,$space){
+    public function removeitem($id, $space)
+    {
         $item = ItemsModel::find($id);
 
-        if($space == 0 & $item->depot_items > 0){
+        if ($space == 0 && $item->depot_items > 0) {
             $item->depot_items -= 1;
         }
 
-        if($space == 1 & $item->home_items > 0){
+        if ($space == 1 && $item->home_items > 0) {
             $item->home_items -= 1;
         }
 

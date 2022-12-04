@@ -71,8 +71,8 @@ pipeline {
             script {
                 docker.withRegistry('https://docker.io', 'docker-hub-credentials') {
                     def img = docker.build "simonloudev/celobat:latest"
-                    img.push("${env.BUILD_NUMBER}")
-                    img.push("latest")
+                    img.push("simonloudev/celobat:latest")
+                    img.push("simonloudev/celobat:{env.BUILD_NUMBER}")
                 }
             }
         }

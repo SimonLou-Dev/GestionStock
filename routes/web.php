@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\StockController::class, 'index'])->name('index');
+Route::get('/', [StockController::class, 'index'])->name('index');
 
-Route::get('/product/add',[App\Http\Controllers\StockController::class, 'add'] )->name('product.add');
-Route::get('/product/remove', [App\Http\Controllers\StockController::class, 'remove'])->name('product.remove');
-Route::post('/remove/product/', [App\Http\Controllers\StockController::class, 'destroy'] )->name('product.destroy');
-Route::post('/add/product/post',[App\Http\Controllers\StockController::class, 'store'] )->name('product.add.post');
+Route::get('/product/add', [StockController::class, 'add'])->name('product.add');
+Route::get('/product/remove', [StockController::class, 'remove'])->name('product.remove');
+Route::post('/remove/product/', [StockController::class, 'destroy'])->name('product.destroy');
+Route::post('/add/product/post', [StockController::class, 'store'])->name('product.add.post');
 
 
-Route::get('/add/item/{id}/{space}', [App\Http\Controllers\StockController::class, 'additem'])->name('add.item');
-Route::get('/remove/item/{id}/{space}', [App\Http\Controllers\StockController::class, 'removeitem'])->name('remove.item');
+Route::get('/add/item/{id}/{space}', [StockController::class, 'additem'])->name('add.item');
+Route::get('/remove/item/{id}/{space}', [StockController::class, 'removeitem'])->name('remove.item');
 
 
