@@ -31,7 +31,7 @@ pipeline {
 
     stage('PHP Testing') {
         steps {
-            sh 'php artisan test'
+            sh './vendor/bin/phpunit --coverage-clover ./reports/coverage.xml --log-junit ./reports/test.xml'
         }
     }
 
