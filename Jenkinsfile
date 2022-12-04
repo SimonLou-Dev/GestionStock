@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Cleaning') {
       steps {
-        checkout scm
+        sh "ls"
       }
     }
 
