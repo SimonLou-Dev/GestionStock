@@ -35,7 +35,7 @@ pipeline {
         }
     }
 
-    stage('SonarScanner')
+    stage('SonarScanner') {
         environment {
                 scannerHome = tool 'scanner'
         }
@@ -78,6 +78,5 @@ pipeline {
         }
       }
     }
-
   }
 }
