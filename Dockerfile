@@ -3,8 +3,7 @@ FROM nginx:latest
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV TZ=UTC
 
-# Copy & set WorkDir
-VOLUME /usr/share/nginx/celobat/storage
+#Set WorkDir
 WORKDIR /usr/share/nginx/celobat
 
 # Env Key & base pakadge
@@ -51,9 +50,11 @@ RUN apt-get install -y postgresql-client \
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
 RUN update-alternatives --set php /usr/bin/php8.1
 
-#Ccopy files
+#Ccopy files And mout volumes
 COPY . /usr/share/nginx/celobat
 COPY --chown=www-data . /usr/share/nginx/celobat
+VOLUME /usr/share/nginx/celobat
+
 
 #Config Nginx And socket
 COPY ./docker/default.conf /etc/nginx/conf.d/default.conf
