@@ -55,7 +55,7 @@ COPY --chown=www-data . /usr/share/nginx/celobat
 VOLUME /usr/share/nginx/celobat
 RUN chmod 777 -R /usr/share/nginx/celobat
 RUN chown www-data -R /usr/share/nginx/celobat
-RUN chmod 777 /usr/share/nginx/celobat/docker/entrypoint.sh
+RUN chmod +x /usr/share/nginx/celobat/docker/entrypoint.sh
 
 
 #Config Nginx And socket
@@ -63,4 +63,4 @@ COPY ./docker/default.conf /etc/nginx/conf.d/default.conf
 #COPY ./docker/www.conf /etc/php/8.1/fpm/pool.d/www.conf
 #Start APP
 EXPOSE 80
-ENTRYPOINT ["/usr/share/nginx/celobat/docker/entrypoint.sh"]
+ENTRYPOINT ["sh", "/usr/share/nginx/celobat/docker/entrypoint.sh"]
