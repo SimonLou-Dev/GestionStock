@@ -56,6 +56,7 @@ COPY --chown=www-data . /usr/share/nginx/celobat
 VOLUME /usr/share/nginx/celobat
 RUN chmod 777 -R /usr/share/nginx/celobat
 RUN chown www-data -R /usr/share/nginx/celobat
+RUN chmod 777 /usr/share/nginx/celobat/docker/entrypoint.sh
 
 
 #Config Nginx And socket
