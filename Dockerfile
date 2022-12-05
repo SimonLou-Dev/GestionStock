@@ -54,6 +54,8 @@ RUN update-alternatives --set php /usr/bin/php8.1
 COPY . /usr/share/nginx/celobat
 COPY --chown=www-data . /usr/share/nginx/celobat
 VOLUME /usr/share/nginx/celobat
+RUN chmod 777 -R /usr/share/nginx/celobat
+RUN chown www-data -R /usr/share/nginx/celobat
 
 
 #Config Nginx And socket
