@@ -51,7 +51,6 @@ RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
 RUN update-alternatives --set php /usr/bin/php8.1
 
 #Ccopy files And mout volumes
-COPY . /usr/share/nginx/celobat
 COPY --chown=www-data . /usr/share/nginx/celobat
 VOLUME /usr/share/nginx/celobat
 RUN chmod 777 -R /usr/share/nginx/celobat
