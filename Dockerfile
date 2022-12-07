@@ -60,7 +60,7 @@ RUN chmod +x /usr/share/nginx/celobat/docker/entrypoint.sh
 
 #Config Nginx And socket
 COPY ./docker/default.conf /etc/nginx/conf.d/default.conf
-#COPY ./docker/www.conf /etc/php/8.1/fpm/pool.d/www.conf
+
 #Start APP
 EXPOSE 80
 ENTRYPOINT ["sh", "/usr/share/nginx/celobat/docker/entrypoint.sh"]

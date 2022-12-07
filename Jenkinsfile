@@ -39,7 +39,7 @@ pipeline {
 
     stage('SonarScanner') {
       environment {
-        scannerHome = 'scanner'
+        scannerHome = tool 'scanner'
       }
       steps {
         withSonarQubeEnv(installationName: 'SonarServ', credentialsId: 'sonar-token') {
@@ -74,7 +74,7 @@ pipeline {
             docker.withRegistry('http://registry.hub.docker.com/', 'docker-hub-credentials') {
               def img = docker.build "simonloudev/celobat:latest"
               img.push("latest")
-              img.push("${env.BUILD_NUMBER}")
+              img.push("build.${env.BUILD_NUMBER}")
             }
           }
 
