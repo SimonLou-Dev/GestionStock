@@ -46,60 +46,29 @@ class CategoryTest extends TestCase
         ]);
     }
 
-    public function testAddItemHome()
+
+    public function testModifyItem()
     {
         $items = self::createItem('test');
+        $homeItems = rand(0, 40);
+        $depotItems = rand(0, 40);
 
-        $response = $this->getJson('/add/item/'.$items->id.'/1');
+        $response = $this->postJson("/update/item", [
+            "home_items" => $homeItems,
+            "depot_items" => $depotItems,
+             "id_item" => $items->id
+        ]);
 
         $response->assertStatus(302);
         $this->assertDatabaseHas('items_models', [
             'item_name' => 'test',
-            'home_items' => 3,
+            "id" => $items->id,
+            'home_items' => $homeItems,
+            'depot_items' => $depotItems
         ]);
+
         ItemsModel::where('item_name', 'test')->delete();
-    }
 
-    public function testAddItemDepot()
-    {
-        $items = self::createItem('test');
-
-        $response = $this->getJson('/add/item/'.$items->id.'/0');
-
-        $response->assertStatus(302);
-        $this->assertDatabaseHas('items_models', [
-            'item_name' => 'test',
-            'depot_items' => 3,
-        ]);
-        ItemsModel::where('item_name', 'test')->delete();
-    }
-
-    public function testRemoveItemHome()
-    {
-        $items = self::createItem('test');
-
-        $response = $this->getJson('/remove/item/'.$items->id.'/1');
-
-        $response->assertStatus(302);
-        $this->assertDatabaseHas('items_models', [
-            'item_name' => 'test',
-            'home_items' => 1,
-        ]);
-        ItemsModel::where('item_name', 'test')->delete();
-    }
-
-    public function testRemoveItemDepot()
-    {
-        $items = self::createItem('test');
-
-        $response = $this->getJson('/remove/item/'.$items->id.'/0');
-
-        $response->assertStatus(302);
-        $this->assertDatabaseHas('items_models', [
-            'item_name' => 'test',
-            'depot_items' => 1,
-        ]);
-        ItemsModel::where('item_name', 'test')->delete();
     }
 
 }

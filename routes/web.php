@@ -22,8 +22,8 @@ Route::post('/remove/product/', [StockController::class, 'destroy'])->name('prod
 Route::post('/add/product/post', [StockController::class, 'store'])->name('product.add.post');
 
 
-Route::get('/add/item/{id}/{space}', [StockController::class, 'additem'])->name('add.item');
-Route::get('/remove/item/{id}/{space}', [StockController::class, 'removeitem'])->name('remove.item');
+Route::post('/update/item', [StockController::class, 'updateItem'])->name('update.item');
+
 
 Route::get('/health', function () {
     return response('OK', 200);

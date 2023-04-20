@@ -47,9 +47,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
-        
+
         if (env('APP_ENV') === 'production') {
             \Illuminate\Support\Facades\URL::forceScheme('https');
+        }else{
+            \Illuminate\Support\Facades\URL::forceScheme('http');
         }
     }
 
