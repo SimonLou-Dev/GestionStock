@@ -75,6 +75,23 @@ class StockController extends Controller
         $product->depot_items = $validated["depot_items"];
         $product->save();
 
-        return redirect()->back();
+        return redirect()->route("index");
     }
+
+    public function removeItem(string $id, string $place){
+        $product = ItemsModel::where("id", $id)->first();
+
+        if($place == "home" && $product->home_items != 0){
+            $product->home_items = $product->home_items - 1;
+        }
+
+        if($place == "depot" && $product->depot_items != 0){
+            $product->depot_items = $product->depot_items - 1;
+        }
+
+        $product->save();
+
+        return redirect()->route("index");
+    }
+
 }

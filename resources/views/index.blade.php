@@ -20,9 +20,11 @@
                             <td class="product">{{$product->item_name}}</td>
                             <td class="number">
                                 <input class="form-control" type="number" min="0" name="home_items" value="{{$product->home_items}}">
+                                <a class="btn" href="{{route("decrement.item", [$product->id, "home"])}}"><i class="fas fa-minus"></i>1</a>
                             </td>
                             <td class="number">
                                 <input class="form-control" type="number" min="0" name="depot_items" value="{{$product->depot_items}}">
+                                <a class="btn" href="{{route("decrement.item", [$product->id, "depot"])}}"><i class="fas fa-minus"></i>1</a>
                             </td>
                             <td class="number"> {{$product->home_items+$product->depot_items}} </td>
                             <td>

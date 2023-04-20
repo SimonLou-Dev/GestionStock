@@ -45,7 +45,6 @@ RUN chmod +x /usr/share/nginx/celobat/docker/entrypoint.sh
 
 #Config Nginx And socket
 COPY ./docker/default.conf /etc/nginx/conf.d/default.conf
-COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
 RUN chgrp -R www-data /usr/share/nginx/celobat/storage/

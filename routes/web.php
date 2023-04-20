@@ -23,7 +23,7 @@ Route::post('/add/product/post', [StockController::class, 'store'])->name('produ
 
 
 Route::post('/update/item', [StockController::class, 'updateItem'])->name('update.item');
-
+Route::get('/remove/item/{id}/{place}', [StockController::class, 'removeItem'])->name('decrement.item');
 
 Route::get('/health', function () {
     return response('OK', 200);
